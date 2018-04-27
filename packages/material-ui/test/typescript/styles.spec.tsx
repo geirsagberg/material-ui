@@ -194,7 +194,6 @@ withStyles<'listItem' | 'guttered'>(theme => ({
         flex: '1 1 auto',
         padding: '0 16px',
       },
-  
       iiiinset: {
         '&:first-child': {
           paddingLeft: theme.spacing.unit * 7,
