@@ -4,10 +4,14 @@ import { ConsistentWith } from '..';
 import { Theme } from './createMuiTheme';
 import * as CSS from 'csstype';
 
-export interface CSSProperties extends CSS.Properties<number | string> {
-  // Allow pseudo selectors and media queries
-  [k: string]: CSS.Properties<number | string>[keyof CSS.Properties] | CSSProperties;
+declare namespace react {
+  export interface CSSProperties extends CSS.Properties<number | string> {
+    // Allow pseudo selectors and media queries
+    [k: string]: CSS.Properties<number | string>[keyof CSS.Properties] | CSSProperties;
+  }
 }
+
+type CSSProperties = React.CSSProperties
 
 /**
  * This is basically the API of JSS. It defines a Map<string, CSS>,
