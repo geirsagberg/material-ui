@@ -3,9 +3,11 @@ import {
   ClassNameMap,
   PropsOfStyles,
   Styles,
-  ThemeOfStyles,
   WithStylesOptions,
+  StyleRules,
+  StyleRulesCallback,
 } from '@material-ui/styles/withStyles';
+import { Theme } from '@material-ui/core';
 
 // https://stackoverflow.com/a/49928360/3406963 without generic branch types
 export type IsAny<T> = 0 extends (1 & T) ? true : false;
@@ -70,7 +72,7 @@ export type StylesHook<S extends Styles<any, any>> = StylesRequireProps<S> exten
   ? (props?: any) => ClassNameMap<ClassKeyOfStyles<S>>
   : (props: PropsOfStyles<S>) => ClassNameMap<ClassKeyOfStyles<S>>;
 
-export default function makeStyles<S extends Styles<any, any>>(
-  styles: S,
-  options?: WithStylesOptions<ThemeOfStyles<S>>,
-): StylesHook<S>;
+export default function makeStyles<C extends string, P extends {}, T = Theme>(
+  styles: StyleRules<P, C> | StyleRulesCallback<T, P, C>,
+  options?: WithStylesOptions<T>,
+): StylesHook<Styles<T, P, C>>;
